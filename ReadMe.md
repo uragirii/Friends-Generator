@@ -37,7 +37,7 @@ I think model was unable to understand data and I would try with different batch
 I have provided the last two checkpoints and model for your reference. The checkpoint of this model in under directory `./training_checkpoints/Model_1` The Model is saved as `Model_1_GRU.h5`. 
 
 ## Model 2 - LSTM Model
-In this I just replaced GRY layer with LSTM layer. LSTM models generally perform better on large datasets. Model summary is 
+In this I just replaced GRU layer with LSTM layer. LSTM models generally perform better on large datasets. Model summary is 
 ```
 Model: "sequential"
 _________________________________________________________________
@@ -57,6 +57,34 @@ Non-trainable params: 0
 This model was trained similarly, but this time I used Google Colab with GPU. This decreased the training time around 41 times! Each epoch now took `42 secs`. I trained for around 37 epochs, after that the loss was again rising.
 
 Similary I have provided model and checkpoint data for your refrence. The checkpoint is under directory `./training_checkpoints/Model_2`, the model is saved as `Model_2_LSTM.h5`.
+
+## Model 3 - 2 LSTM Layers
+This time I increased the embedding dimension to 512, and added an extra layer of LSTM. This increased the depth of model and this model was able to learn deeper relation between texts. Model summary is
+
+```
+Model: "sequential_7"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+embedding_7 (Embedding)      (64, None, 512)           48128     
+_________________________________________________________________
+lstm_4 (LSTM)                (64, None, 1024)          6295552   
+_________________________________________________________________
+lstm_5 (LSTM)                (64, None, 1024)          8392704   
+_________________________________________________________________
+dense_7 (Dense)              (64, None, 94)            96350     
+=================================================================
+Total params: 14,832,734
+Trainable params: 14,832,734
+Non-trainable params: 0
+_________________________________________________________________
+```
+
+This time no. params are also around 3 times as compared to 1 layered LSTM. The training time also increased from 42 secs to 94 secs. Thanks to Colab GPUs, training time was reduced. This time training loss was not increasing, but continously decreasing. I stopped training at 32 epochs as loss was not decreasing much.
+
+This time, I'm not providing model checkpoints as size of repository has increased quite a much. I will upload the model as `Model_3_LSTM.h5`. This model will be used in the webinterface also. 
+
+I also changed `temperature` value in the `generate_text()` function. This increased model's "confidence".
 ---
 ## Outputs
 
@@ -105,7 +133,7 @@ _(1000 characters)_
 
 This text is worse than before. Model has many open brackets etc. Hopefully LSTM model will fix this.
 
-## Model 2 - LSTM Layer
+### Model 2 - LSTM Layer
 
 Similar to previous, I fed two different inputs. First input was `THE ONE W`. Output was
 
@@ -143,3 +171,29 @@ Joey: Is that a candle? OK, so who's not proud to work? Its us the game!
 Chandler: You care enough time, (pa
 ```
 LSTM model also performed similar to GRU model. In the model 3, I will maybe increase layers, RNN units, Embedding Dimensions.
+
+### Model 3 - 2 Layer LSTM
+
+This time, I changed the `temperature` value and increased the character size also. This time, model predicts 5000 characters. This gives time for us to understand if there is some plot or not. Some 2-3 lines have a simple relations. Brackets are still sometime an issue. But this time model was predicting somewhat better script.
+
+Due to length of script, I have moved the script into files `Model_3_Output_1.txt` and `Model_3_Output_2.txt`. Starting 6-7 lines of Output 1 are given below.
+```
+THE ONE WITH THE BABY!
+Monica: (finishing and walks back in) Hey! This is Chandler!
+(Chandler starts to leave.)
+Chandler: Oh, that's a good thing about six fingers!
+(Ross runs into the bathroom)
+Ross: Whoa-whoa-whoa! What are you doing?
+Joey: Treegers, when I didnt say anything to Ross.
+Phoebe: Okay I cant figure out what theyre doing.
+Monica: I wanted to see you again, but Im trying to get rid of all the stuff about it.
+Rachel: Yeah I know! I know! (Quietly) Wow. She was right there. So what did you think of the closet on the couch?
+Rachel: What if the party still has enthustarts to cry) Oh my God! (Rushes the ball away from him.)
+Mr. Geller: Have a seat son, contractions!
+```
+
+---
+
+_The transcripts and FRIENDS TV Show are a part of Warner Bros. Production and their property._
+
+_Special thanks to all the persons who transcribed the TV Show episodes._

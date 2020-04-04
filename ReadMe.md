@@ -85,6 +85,7 @@ This time no. params are also around 3 times as compared to 1 layered LSTM. The 
 This time, I'm not providing model checkpoints as size of repository has increased quite a much. I will upload the model as `Model_3_LSTM.h5`. This model will be used in the webinterface also. 
 
 I also changed `temperature` value in the `generate_text()` function. This increased model's "confidence".
+
 ---
 ## Outputs
 

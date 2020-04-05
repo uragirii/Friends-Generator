@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends Script Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body >
+    <div class="mb-5 pb-5">
+        <div class="row mx-0 mb-4 pb-4 mt-5" >
+            <div class="col-md-6 pl-5 text-center my-auto col-12">
+                <div>
+                    <h1 class="display-3 my-auto" style="font-family: 'Roboto Mono', monospace;">The One W<span
+                        class="txt-rotate"
+                        data-period="2000"
+                        data-rotate='[ "ith The Baby", "ith The Halliswer", "ith Uncle Max", "ith The Home States", "ith The Gonthor" ]'>
+                     </span></h1>
+                </div>
+                
+            </div>
+            <div class="col-md-6 px-4 text-center my-auto">
+                <div class="px-auto py-3">
+                    <img src="./imgs/couch.jpg" alt="Friends Couch">
+                </div>
+                <p style="font-family: 'Inria Sans', sans-serif;">Everyone loves Friends. Even 10 seasons are not enough for us. So, I tried to built a machine learning model to write new Friends scripts for me.
+                    Just enter a few starting words and select the number of characters to predict. It will generate the text accordingly.</p>
+                <p style="font-family: 'Inria Sans', sans-serif;">I trained model on the entire script of Friends. The episodes were transcribed and fed to model for training.</p>
+                <p style="font-family: 'Inria Sans', sans-serif;">Recurrent Neural Networks are a powerful tool to process sequence. RNNs are used in Text Translation, Weather Forecasting, Time Series analysis.
+                    Here, I am using a 2 layer LSTM model with word embeddings to generate the new text. If you want to learn more about model, see my <a href="https://github.com/uragirii/Friends-Generator">GitHub Repo</a>.</p>
+            </div>
+        </div>
+        <div id="getInputs" class="container pb-5">
+            <h4 class="my-5" style="font-family: 'Inria Sans', sans-serif;">The One Where Tensorflow writes Friends</h4>
+            <p style="font-family: 'Inria Sans', sans-serif;">
+                Just provide some starting words and the model will try to generate Friends script. Note that more number of characters will take more time to generate them. Loading time depends on your Internet Connection and device
+            </p>
+            <div class="container">
+                <div>
+                <form  class="row pt-4">
+                    <div class="col-md-4">
+                        <label for="input">Some starting characters</label>
+                        <input type="text" id="input" class="form-control mb-2" placeholder="Starting words" name="input" required>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <label for="num_gen">No. of Characters to generate</label>
+                        <input type="number" id="num_gen" value="100" class="form-control mb-2" required name="chars">
+                    </div>
+                    <div class="col-md-4 mt-4" id="submit">
+                    <button class="btn btn-primary" type="button" disabled id="loadingButton">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" id="#spinner"></span>
+                        Loading Model
+                      </button>
+                      <button class="btn btn-primary" type="submit" id="generate">
+                        Generate Text
+                      </button>
+                    </div>
+                    <div class="col-md-12 mt-4 d-flex justify-content-center" >
+                        <span class="spinner-border spinner-border" role="status" aria-hidden="true" id="outputLoading"></span>
+                    </div>
+                    <div class="col-md-12 mt-4" id="display_output">
+                        <p>Generated Text</p>
+                        <p style="font-family: 'Roboto Mono', monospace;white-space: pre-line" id="output">This is a generated output byt the model \n sdfjfb</p>
+                    </div>                      
+                </form>
+            </div>
+            </div>
+        </div>
+        <div class="container">
+            <hr width="25%">
+        </div>
+    </div>
+    <div class="footer text-light" style="background-color: black;font-family: 'Roboto Mono', monospace;white-space: pre-line">
+        <div class="container">
+            <div class="text-center pb-0 mb-0">Made with &#10084; by Apoorv Kansal. If you loved this, checkout my <a href="https://github.com/uragirii">GitHub</a> for more.</div>
+            <p class="pt-1 text-center"><small>Special thanks to all the people who transcribed Friends Episodes. Checkout <a href="https://github.com/fangj/friends">fangj's Repository</a></small>
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="index.js"></script>
+</body>
+</html>

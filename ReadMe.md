@@ -1,5 +1,7 @@
 # Friends Generator
 
+**Now check out live implementation of this model using TensorflowJS on this [repo's website](https://uragirii.github.io/Friends-Generator/).**
+
 This is just a simple RNN text generation model that generates new scripts of Friends TV Show. 
 
 The code in `main.py` extracts all Episode Transcripts and store them in `Data/Friends_Transcript.txt`. 

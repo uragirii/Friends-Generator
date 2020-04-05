@@ -13,7 +13,6 @@ const stopLoading = ()=>{
 }
 const stopSpinner = () =>{
     $("#outputLoading").hide();
-    console.log("Spinner Stopped")
 }
 
 $("#generate").on("click",function(e){
@@ -43,6 +42,13 @@ const updateText = (text)=>{
     document.getElementById("output").textContent=text
 }
 
+$("#generateMore").on("click", function(e){
+  e.preventDefault();
+  let text = $("#output").text()
+  let num_gen = Number($("#num_gen").val())
+  predictText(text, num_gen,false)
+})
+
 const encodeText = (text)=>{
     let encoded = []
     for(let i=0;i<text.length;++i){
@@ -59,13 +65,13 @@ const decodeText = (encodedText)=>{
     return decodedText
 }
 
-const predictText = (text, num_generate)=>{
+const predictText = (text, num_generate,reset=true)=>{
     input_eval = encodeText(text)
     input_eval = tf.expandDims(input_eval, 0)
-
     text_generated = ""
-
-    model.resetStates()
+    if(reset){
+      model.resetStates()    
+    }
     for(let i=0;i<num_generate;++i){
         let predictions = model.predict(input_eval)
         predictions = tf.squeeze(predictions,0)
@@ -76,7 +82,6 @@ const predictText = (text, num_generate)=>{
         text_generated+=getKeyByValue(encodings, predicted_id)
     }
     updateText(text+text_generated)
-    stopSpinner()
     $("#display_output").show();
     return text_generated
 }
